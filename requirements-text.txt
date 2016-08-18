@@ -1,0 +1,3 @@
+# Test
+pytest==2.9.2
+mock==2.0.0
