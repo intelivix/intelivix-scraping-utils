@@ -1,0 +1,11 @@
+language: python
+python:
+    - "2.7"
+install:
+    - "python setup.py install"
+    - "pip install coverage"
+    - "pip install coveralls"
+script: 
+    - "py.test tests/ --cov"
+after_success:
+    coveralls
