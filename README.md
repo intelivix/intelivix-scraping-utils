@@ -1,1 +1,0 @@
-# intelivix-scraping-utils
