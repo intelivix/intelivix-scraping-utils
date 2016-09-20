@@ -25,7 +25,11 @@ class DBCSolver(CaptchaSolver):
     def __call__(self, file_path, credentials=(), timeout=20):
         self.credentials = credentials
         response = self.client.decode(file_path, timeout)
-        return response['text']
+        if not response:
+            raise RuntimeWarning(
+                'DBC was unable to break this captcha.')
+        else:
+            return response['text']
 
 
 class IcebreakerSolver(CaptchaSolver):
