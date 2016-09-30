@@ -1,4 +1,5 @@
 from deathbycaptcha import SocketClient
+from cc_exceptions import CaptchaTranslationError
 
 
 class CaptchaSolver(object):
@@ -26,10 +27,13 @@ class DBCSolver(CaptchaSolver):
         self.credentials = credentials
         response = self.client.decode(file_path, timeout)
         if not response:
-            raise RuntimeWarning(
+            raise CaptchaTranslationError(
                 'DBC was unable to break this captcha.')
         else:
-            return response['text']
+            return response
+
+    def report(self, response):
+        self.client.report(response['captcha'])
 
 
 class IcebreakerSolver(CaptchaSolver):
