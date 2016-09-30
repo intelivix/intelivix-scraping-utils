@@ -13,4 +13,4 @@ def test_solve_captcha():
 
     assert death_by_captcha.client.__class__ is SocketClient
     assert death_by_captcha.credentials == credentials
-    assert response == 'abc123'
+    assert response['text']  == 'abc123'
