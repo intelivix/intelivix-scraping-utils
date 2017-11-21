@@ -10,5 +10,5 @@ setup(
     author='Walter Sobral',
     author_email='wsacin@gmail.com',
     keywords=['captcha', 'deathbycaptcha'],
-    packages=['creamcracker'],
+    packages=['creamcracker', 'spidercoverage'],
     )
