@@ -2,6 +2,7 @@
 
 import json
 
+from utils import raw_value
 from constants import DEFAULT_COVERAGE, ESTADOS_BRASIL
 
 
@@ -66,7 +67,7 @@ class SpiderCoverageMixin(object):
         # Coverage
         coverage = getattr(cls, 'coverage', {})
         if cls.check_multiple_coverage(coverage.keys()):
-            output.update({'coverage': coverage})
+            output.update({'coverage': raw_value(coverage)})
         else:
             output.update(getattr(cls, 'coverage', {}))
 

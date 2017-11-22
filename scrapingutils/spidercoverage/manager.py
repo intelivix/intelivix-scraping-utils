@@ -24,7 +24,7 @@ HEADER = {
     'estado': None,
     'fonte': None,
     'status': SpiderStatus,
-    'captcha': bool,
+    'captcha': None,
     'arquivos': DocumentoStatus,
     '1-grau-fisico': InstanciaStatus,
     '2-grau-fisico': InstanciaStatus,
@@ -36,24 +36,18 @@ HEADER = {
     'jec-2-grau-eletronico': InstanciaStatus,
 }
 
-COVERAGE_TYPE = {
-    '0': 'Não Existe',
-    '1': 'Implementado',
-    '2': 'Não implementado',
-}
-
 
 class CoverageCsvFactory(object):
 
     def create_row(self, sdc_dict):
         row = []
-        for key, value in HEADER.items():
+        for key, header_type in HEADER.items():
             if key in sdc_dict.keys():
                 value = str(sdc_dict[key])
-                import ipdb
-                ipdb.set_trace()
-                if value in COVERAGE_TYPE.keys():
-                    value = COVERAGE_TYPE[value]
+
+                if header_type:
+                    value = header_type().name
+
                 row.append(value)
             else:
                 row.append(None)
