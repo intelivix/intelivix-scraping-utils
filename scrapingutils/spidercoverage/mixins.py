@@ -69,6 +69,6 @@ class SpiderCoverageMixin(object):
         if cls.check_multiple_coverage(coverage.keys()):
             output.update({'coverage': raw_value(coverage)})
         else:
-            output.update(getattr(cls, 'coverage', {}))
+            output.update(raw_value(getattr(cls, 'coverage', {})))
 
         return json.dumps(output, ensure_ascii=False)
