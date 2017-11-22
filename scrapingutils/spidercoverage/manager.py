@@ -54,7 +54,7 @@ class CoverageCsvFactory(object):
         return row
 
     @classmethod
-    def export_data_coverage(results):
+    def export_data_coverage(cls, results):
         timestr = time.strftime("%Y%m%d-%H%M%S")
         with open('spider-report-%s.csv' % timestr, 'wb') as csvfile:
             coverage = csv.writer(csvfile, delimiter=';', quotechar='|')
