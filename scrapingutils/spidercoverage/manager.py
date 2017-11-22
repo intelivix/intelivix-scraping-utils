@@ -39,7 +39,8 @@ HEADER = {
 
 class CoverageCsvFactory(object):
 
-    def create_row(self, sdc_dict):
+    @classmethod
+    def create_row(cls, sdc_dict):
         row = []
         for key, header_type in HEADER.items():
             if key in sdc_dict.keys():
@@ -74,9 +75,9 @@ class CoverageCsvFactory(object):
                                     sdc_dict['coverage']['default']
                                 )
                         sdc_subdict['estado'] = estado
-                        coverage.writerow(self.create_row(sdc_subdict))
+                        coverage.writerow(cls.create_row(sdc_subdict))
                 else:
-                    coverage.writerow(self.create_row(sdc_dict))
+                    coverage.writerow(cls.create_row(sdc_dict))
         print 'CSV EXPORTADO COM SUCESSO!'
 
 
