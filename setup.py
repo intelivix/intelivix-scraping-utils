@@ -11,4 +11,9 @@ setup(
     author_email='wsacin@gmail.com',
     keywords=['captcha', 'deathbycaptcha', 'coverage'],
     packages=find_packages(),
+    entry_points={
+        'console_scripts': [
+            'coveragecsv = scrapingutils.spidercoverage.manager:main',
+        ],
+    }
     )
