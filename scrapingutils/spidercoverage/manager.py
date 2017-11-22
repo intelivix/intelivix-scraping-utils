@@ -86,7 +86,7 @@ class CoverageCsvFactory(object):
         print 'CSV EXPORTADO COM SUCESSO!'
 
 
-if __name__ == '__main__':
+def main():
 
     args = sys.argv
 
