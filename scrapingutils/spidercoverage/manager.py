@@ -87,27 +87,23 @@ class CoverageCsvFactory(object):
 
 
 def main():
+    spiders_results = []
+    for settings in [SCRAPY_SET, SELENIUM_SET]:
+        os.chdir(settings['dir'])
 
-    args = sys.argv
+        try:
+            os.system(
+                "python spider-coverage.py yaml")
+            cov_text = open(settings['yaml'], 'r')
+            spiders_results.extend(yaml.load(cov_text))
+            os.remove(settings['yaml'])
+        except ScannerError as e:
+            raise Exception(
+                'Problemas ao ler o arquivo "%s".' % settings['yaml'])
+        except IOError as e:
+            print ('Arquivo da spider não localizado "%s".' %
+                   settings['yaml'])
 
-    if 'csv' in args:
-        spiders_results = []
-        for settings in [SCRAPY_SET, SELENIUM_SET]:
-            os.chdir(settings['dir'])
+        os.chdir('..')
 
-            try:
-                os.system(
-                    "python spider-coverage.py yaml")
-                cov_text = open(settings['yaml'], 'r')
-                spiders_results.extend(yaml.load(cov_text))
-                os.remove(settings['yaml'])
-            except ScannerError as e:
-                raise Exception(
-                    'Problemas ao ler o arquivo "%s".' % settings['yaml'])
-            except IOError as e:
-                print ('Arquivo da spider não localizado "%s".' %
-                       settings['yaml'])
-
-            os.chdir('..')
-
-        CoverageCsvFactory.export_data_coverage(spiders_results)
+    CoverageCsvFactory.export_data_coverage(spiders_results)
