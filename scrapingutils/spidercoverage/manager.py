@@ -74,9 +74,9 @@ class CoverageCsvFactory(object):
                                     sdc_dict['coverage']['default']
                                 )
                         sdc_subdict['estado'] = estado
-                        coverage.writerow(create_row(sdc_subdict))
+                        coverage.writerow(self.create_row(sdc_subdict))
                 else:
-                    coverage.writerow(create_row(sdc_dict))
+                    coverage.writerow(self.create_row(sdc_dict))
         print 'CSV EXPORTADO COM SUCESSO!'
 
 
