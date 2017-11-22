@@ -47,7 +47,7 @@ class CoverageCsvFactory(object):
                 value = str(sdc_dict[key])
 
                 if header_type:
-                    value = header_type().name
+                    value = header_type(value).name
 
                 row.append(value)
             else:
