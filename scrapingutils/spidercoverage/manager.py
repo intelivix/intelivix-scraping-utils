@@ -23,6 +23,7 @@ HEADER = {
     'name': None,
     'estado': None,
     'fonte': None,
+    'justica': None,
     'status': SpiderStatus,
     'captcha': None,
     'arquivos': DocumentoStatus,
