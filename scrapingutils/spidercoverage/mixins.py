@@ -39,7 +39,8 @@ class SpiderCoverageMixin(object):
 
     @classmethod
     def test_spider(cls):
-        if 'extrair' not in getattr(cls, 'name', ''):
+        if ('extrair' not in getattr(cls, 'name', '') and
+                not getattr(cls, 'skip_coverage', False)):
             if not cls.check_default_coverage():
                 raise Exception(
                     u'Spider coverage arguments are equal to default')
