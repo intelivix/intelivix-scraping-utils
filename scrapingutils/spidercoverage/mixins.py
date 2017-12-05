@@ -51,7 +51,7 @@ class SpiderCoverageMixin(object):
     def output_json(cls):
         output = {}
         # Required Fields
-        for arg in ['name', 'fonte']:
+        for arg in ['name', 'fonte', 'justica']:
             arg_dict = {arg: getattr(cls, arg, '')}
             output.update(arg_dict)
 
