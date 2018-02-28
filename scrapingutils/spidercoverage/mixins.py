@@ -73,7 +73,17 @@ class SpiderCoverageMixin(object):
             output.update(raw_value(getattr(cls, 'coverage', {})))
 
         # Arguments
-        arg_list = getattr(cls, 'optional_args', {})
+        valid_args = set([
+            'nome',
+            'documento',
+            'numero',
+            'advogado',
+            'oab',
+            'cnpj',
+            'cpf'
+        ])
+        args_set = set(getattr(cls, 'optional_args', {}))
+        args_list = list(args_set.intersection(valid_args))
         if arg_list:
             argumentos = ''.join(arg_list)
             output.update({'argumentos': argumentos})
