@@ -72,4 +72,10 @@ class SpiderCoverageMixin(object):
         else:
             output.update(raw_value(getattr(cls, 'coverage', {})))
 
+        # Arguments
+        arg_list = getattr(cls, 'optional_args', {})
+        if arg_list:
+            argumentos = ''.join(arg_list)
+            output.update({'argumentos': argumentos})
+
         return json.dumps(output, ensure_ascii=False)

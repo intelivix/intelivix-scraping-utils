@@ -27,6 +27,7 @@ HEADER = {
     'status': SpiderStatus,
     'captcha': None,
     'arquivos': DocumentoStatus,
+    'argumentos': None,
     '1-grau-fisico': InstanciaStatus,
     '2-grau-fisico': InstanciaStatus,
     '1-grau-eletronico': InstanciaStatus,
