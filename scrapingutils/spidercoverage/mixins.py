@@ -84,8 +84,8 @@ class SpiderCoverageMixin(object):
         ])
         args_set = set(getattr(cls, 'optional_args', {}))
         args_list = list(args_set.intersection(valid_args))
-        if arg_list:
-            argumentos = ''.join(arg_list)
+        if args_list:
+            argumentos = ' - '.join(args_list)
             output.update({'argumentos': argumentos})
 
         return json.dumps(output, ensure_ascii=False)
