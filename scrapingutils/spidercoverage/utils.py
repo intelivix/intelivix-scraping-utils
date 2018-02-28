@@ -64,7 +64,7 @@ class GoogleSheetCoverage(object):
                 role='writer'
             )
 
-        spread_sheet = gc.open(self.sheet_title)
+        spread_sheet = gsheet_client.open(self.sheet_title)
 
         with open(coverage_csv_name) as csv_file:
             data = csv_file.read()
