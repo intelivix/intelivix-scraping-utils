@@ -63,7 +63,7 @@ class CoverageCsvFactory(object):
         timestr = time.strftime("%Y%m%d-%H%M%S")
         report_file_name = 'spider-report-{}.csv'.format(timestr)
         with open(report_file_name, 'wb') as csvfile:
-            coverage = csv.writer(csvfile, delimiter=';', quotechar='|')
+            coverage = csv.writer(csvfile, delimiter=',', quotechar='|')
             coverage.writerow(HEADER.keys())
             for sdc_dict in results:
                 # Spider que cobre mais de um estado
