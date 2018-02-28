@@ -5,6 +5,8 @@ import os
 import yaml
 from oauth2client.service_account import ServiceAccountCredentials
 
+from constants import KEY_FILE_DICT
+
 
 def raw_value(coverage_dict):
     for key, init_value in coverage_dict.items():
@@ -47,8 +49,8 @@ class GoogleSheetCoverage(object):
         dirname = os.path.dirname(os.path.abspath(__file__))
         key_file_path = dirname + '/credentials/tribunais-coverage.json'
 
-        return ServiceAccountCredentials.from_json_keyfile_name(
-            key_file_path, scope
+        return ServiceAccountCredentials.from_json_keyfile_dict(
+            KEY_FILE_DICT, scope
         )
 
     def update_csv_sheet(self, coverage_csv_name):
