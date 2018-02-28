@@ -58,11 +58,11 @@ class GoogleSheetCoverage(object):
 
         if not gsheet_client.openall(title=self.sheet_title):
             spread_sheet = gsheet_client.create(self.sheet_title)
-            # spread_sheet.share(
-            #     'robo_intelivix@intelivix.com',
-            #     perm_type='user',
-            #     role='owner'
-            # )
+            spread_sheet.share(
+                'robo_intelivix@intelivix.com',
+                perm_type='user',
+                role='writer'
+            )
 
         spread_sheet = gc.open(self.sheet_title)
 
