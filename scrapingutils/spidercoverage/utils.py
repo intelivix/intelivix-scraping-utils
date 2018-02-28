@@ -1,6 +1,9 @@
 import enum
+import gspread
 import json
+import os
 import yaml
+from oauth2client.service_account import ServiceAccountCredentials
 
 
 def raw_value(coverage_dict):
@@ -30,3 +33,37 @@ class SpiderDataCoverage(object):
     def export_spider_coverage_yaml(self):
         with open(self._yaml_file, 'w') as yaml_file:
             yaml.dump(self.results, yaml_file, default_flow_style=False)
+
+
+class GoogleSheetCoverage(object):
+
+    sheet_title = 'Tribunais coverage'
+
+    def get_credentials(self):
+        scope = [
+            'https://spreadsheets.google.com/feeds',
+            'https://www.googleapis.com/auth/drive'
+        ]
+        dirname = os.path.dirname(os.path.abspath(__file__))
+        key_file_path = dirname + '/credentials/tribunais-coverage.json'
+
+        return ServiceAccountCredentials.from_json_keyfile_name(
+            key_file_path, scope
+        )
+
+    def update_csv_sheet(self, coverage_csv_name):
+        gsheet_client = gspread.authorize(self.get_credentials())
+
+        if not gsheet_client.openall(title=self.sheet_title):
+            spread_sheet = gsheet_client.create(self.sheet_title)
+            spread_sheet.share(
+                'robo_intelivix@intelivix.com',
+                perm_type='user',
+                role='owner'
+            )
+
+        spread_sheet = gc.open(self.sheet_title)
+
+        with open(coverage_csv_name) as csv_file:
+            data = csv_file.read()
+            gsheet_client.import_csv(spread_sheet.id, data)

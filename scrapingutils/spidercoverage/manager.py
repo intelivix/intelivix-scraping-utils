@@ -7,6 +7,7 @@ import sys
 import yaml
 from yaml.scanner import ScannerError
 from enums import InstanciaStatus, DocumentoStatus, SpiderStatus
+from utils import GoogleSheetCoverage
 
 
 SCRAPY_SET = {
@@ -60,7 +61,8 @@ class CoverageCsvFactory(object):
     @classmethod
     def export_data_coverage(cls, results):
         timestr = time.strftime("%Y%m%d-%H%M%S")
-        with open('spider-report-%s.csv' % timestr, 'wb') as csvfile:
+        report_file_name = 'spider-report-{}.csv'.format(timestr)
+        with open(report_file_name, 'wb') as csvfile:
             coverage = csv.writer(csvfile, delimiter=';', quotechar='|')
             coverage.writerow(HEADER.keys())
             for sdc_dict in results:
@@ -81,7 +83,8 @@ class CoverageCsvFactory(object):
                         coverage.writerow(cls.create_row(sdc_subdict))
                 else:
                     coverage.writerow(cls.create_row(sdc_dict))
-        print 'CSV EXPORTADO COM SUCESSO!'
+        print('CSV EXPORTADO COM SUCESSO!')
+        return report_file_name
 
 
 def main():
@@ -104,4 +107,7 @@ def main():
 
         os.chdir('..')
 
-    CoverageCsvFactory.export_data_coverage(spiders_results)
+    report_file_name = CoverageCsvFactory.export_data_coverage(spiders_results)
+
+    google_sc = GoogleSheetCoverage()
+    google_sc.update_csv_sheet(report_file_name)
